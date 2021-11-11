@@ -27,7 +27,7 @@ public class UserMain {
         System.out.println("List of added users:");
         System.out.println("====================");
 
-        userMain.listUsers(16);
+        userMain.showUser(16);
 
         System.out.println("====================");
         System.out.println("Removing second user and update first user's email:");
@@ -36,7 +36,7 @@ public class UserMain {
         System.out.println("Done!");
 
         System.out.println("Final List:");
-        userMain.listUsers();
+        userMain.showUser(14);
     }
 
     //add new user
@@ -53,7 +53,7 @@ public class UserMain {
     }
 
     //show user by his id
-    public void listUsers(int userId) {
+    public void showUser(int userId) {
         Session session =   sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
