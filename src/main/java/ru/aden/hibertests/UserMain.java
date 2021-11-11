@@ -4,7 +4,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import ru.aden.hibertests.models.User;
+
 
 import java.util.List;
 
@@ -25,13 +27,13 @@ public class UserMain {
         System.out.println("List of added users:");
         System.out.println("====================");
 
-        userMain.listUsers();
+        userMain.listUsers(16);
 
         System.out.println("====================");
         System.out.println("Removing second user and update first user's email:");
         userMain.removeUser(15);
         userMain.updateUserEmail(14, "newUpdatedMail@mail.com");
-        System.out.println("Done \n");
+        System.out.println("Done!");
 
         System.out.println("Final List:");
         userMain.listUsers();
@@ -50,15 +52,13 @@ public class UserMain {
         return userId;
     }
 
-    //showAllUsers
-    public void listUsers() {
+    //show user by his id
+    public void listUsers(int userId) {
         Session session =   sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        List users = session.createQuery("FROM User").list();
-        for (Object user : users) {
-            System.out.println(user);
-        }
+        User user = (User) session.get(User.class, userId);
+        System.out.println(user.toString());
         System.out.println("==================");
 
         session.close();
